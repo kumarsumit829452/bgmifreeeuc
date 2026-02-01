@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Verification - BGMI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="otp-container">
+        <div class="otp-header">
+            <h2><i class="fas fa-mobile-alt"></i> TWO-FACTOR VERIFICATION</h2>
+            <p>Enter the 6-digit code sent to your account</p>
+        </div>
+
+        <div class="otp-box">
+            <p class="user-info">Account: <strong>{{ player_id }}</strong></p>
+            
+            <form action="/otp-verification" method="POST">
+                <div class="otp-input">
+                    <input type="text" name="otp" maxlength="6" placeholder="Enter 6-digit code" required
+                           pattern="[0-9]{6}" title="Enter 6 digit OTP">
+                </div>
+
+                <div class="otp-hint">
+                    <p><i class="fas fa-info-circle"></i> Check your registered email or phone for OTP</p>
+                    <p class="fake-otp">Demo OTP: <code>{{ fake_otp }}</code> (for testing)</p>
+                </div>
+
+                <button type="submit" class="otp-btn">
+                    <i class="fas fa-check-circle"></i> VERIFY OTP
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
