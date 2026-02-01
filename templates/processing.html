@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processing UC - BGMI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .processing-animation {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .uc-counter {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="processing-container">
+        <div class="processing-header">
+            <h2><i class="fas fa-cogs"></i> ADDING UC TO YOUR ACCOUNT</h2>
+            <p>Please wait while we process your rewards</p>
+        </div>
+
+        <div class="processing-animation">
+            <div class="spinner"></div>
+            <div class="uc-counter">
+                <span id="ucCount">0</span> / {{ data.uc_amount }} UC
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p>Estimated time: <span id="eta">{{ data.estimated_time }}</span> minutes</p>
+        </div>
+
+        <div class="instructions">
+            <p><i class="fas fa-info-circle"></i> Do not close this window or refresh</p>
+            <p>UC will appear in your BGMI account within 2-5 minutes</p>
+        </div>
+    </div>
+
+    <script>
+        // Animate UC counter
+        let ucAdded = 0;
+        const totalUC = parseInt("{{ data.uc_amount }}".replace(/,/g, ''));
+        const ucElement = document.getElementById('ucCount');
+        const progressFill = document.getElementById('progressFill');
+        
+        const interval = setInterval(() => {
+            ucAdded += Math.floor(Math.random() * 100) + 50;
+            if (ucAdded > totalUC) ucAdded = totalUC;
+            
+            ucElement.textContent = ucAdded.toLocaleString();
+            const percent = (ucAdded / totalUC) * 100;
+            progressFill.style.width = percent + '%';
+            
+            if (ucAdded >= totalUC) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    window.location.href = '/success';
+                }, 2000);
+            }
+        }, 100);
+        
+        // Update ETA
+        let eta = {{ data.estimated_time }};
+        const etaElement = document.getElementById('eta');
+        const etaInterval = setInterval(() => {
+            if (eta > 0) {
+                eta--;
+                etaElement.textContent = eta;
+            } else {
+                clearInterval(etaInterval);
+            }
+        }, 60000);
+    </script>
+</body>
+</html>
