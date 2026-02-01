@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 FREE BGMI UC & SKINS - 10,000 UC INSTANT</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for BGMI theme */
+        :root {
+            --bgmi-red: #FF0000;
+            --bgmi-gold: #FFD700;
+            --bgmi-blue: #00BFFF;
+            --bgmi-dark: #0a0a2a;
+        }
+        
+        .bgmi-badge {
+            background: linear-gradient(45deg, var(--bgmi-red), var(--bgmi-gold));
+            color: black;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="/static/images/bgmi-logo.png" alt="BGMI" class="logo">
+            <h1><i class="fas fa-crown"></i> FREE 10,000 UC + MYTHIC SKINS</h1>
+            <p class="subtitle">Official Krafton BGMI Anniversary Rewards</p>
+            <div class="bgmi-badge">🔥 LIMITED TIME OFFER</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>{{ stats.players_served }}</h3>
+                <p>Players Served</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-coins"></i>
+                <h3>{{ stats.uc_delivered }}</h3>
+                <p>UC Delivered</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-globe-asia"></i>
+                <h3>{{ stats.online_now }}</h3>
+                <p>Online Now</p>
+            </div>
+        </div>
+
+        <!-- Rewards Grid -->
+        <div class="rewards-grid">
+            <div class="reward-card">
+                <img src="/static/images/uc-coins.png" alt="UC Coins">
+                <h3>10,000 UC</h3>
+                <p>Instant Top-up</p>
+                <div class="price">FREE</div>
+            </div>
+            
+            <div class="reward-card">
+                <img src="/static/images/mythic-skin.png" alt="Mythic Skin">
+                <h3>Mythic Skin Set</h3>
+                <p>Full Outfit</p>
+                <div class="price">FREE</div>
+            </div>
+            
+            <div class="reward-card">
+                <img src="/static/images/glacier-weapon.png" alt="Glacier M416">
+                <h3>Glacier M416</h3>
+                <p>Legendary Weapon</p>
+                <div class="price">FREE</div>
+            </div>
+        </div>
+
+        <!-- Claim Form -->
+        <div class="claim-form">
+            <h2><i class="fas fa-gift"></i> SELECT YOUR REWARDS</h2>
+            
+            <form action="/claim" method="POST">
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="uc_amount" value="10000" checked>
+                        <span class="checkmark"></span>
+                        💎 10,000 FREE UC (Instant Delivery)
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="mythic" value="yes" checked>
+                        <span class="checkmark"></span>
+                        👑 MYTHIC SKIN SET (Full Outfit)
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="glacier" value="yes" checked>
+                        <span class="checkmark"></span>
+                        🔫 GLACIER M416 (Legendary Weapon)
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="royale_pass" value="yes" checked>
+                        <span class="checkmark"></span>
+                        🎫 ROYALE PASS LEVEL 100
+                    </label>
+                </div>
+
+                <button type="submit" class="claim-btn">
+                    <i class="fas fa-rocket"></i> CLAIM FREE REWARDS NOW
+                </button>
+            </form>
+
+            <div class="timer">
+                <p><i class="fas fa-clock"></i> Offer expires in: <span id="timer">24:59:59</span></p>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h3><i class="fas fa-star"></i> PLAYER REVIEWS</h3>
+            <div class="testimonial">
+                <p>"Got 10k UC instantly! Working 2024!" - ProPlayer99</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="testimonial">
+                <p>"Mythic skin unlocked! Legit service!" - BGMI_God</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="testimonial">
+                <p>"Free UC actually works! Thank you!" - NoobMaster69</p>
+                <div class="rating">★★★★★</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><i class="fas fa-shield-alt"></i> Official BGMI Partner | Secure Connection</p>
+            <p class="copyright">© 2024 Krafton Inc. Battlegrounds Mobile India</p>
+        </div>
+    </div>
+
+    <script>
+        // Timer countdown
+        let timeLeft = 24 * 60 * 60; // 24 hours
+        const timerElement = document.getElementById('timer');
+        const progressElement = document.getElementById('progress');
+        
+        function updateTimer() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const progressPercent = 100 - (timeLeft / (24 * 60 * 60) * 100);
+            progressElement.style.width = progressPercent + '%';
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        updateTimer();
+        
+        // Animate stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 20);
+        }
+        
+        // Animate all stats
+        document.querySelectorAll('.stat-card h3').forEach(stat => {
+            const target = parseInt(stat.textContent.replace(/,/g, ''));
+            if (!isNaN(target)) {
+                stat.textContent = '0';
+                setTimeout(() => animateCounter(stat, target), 500);
+            }
+        });
+    </script>
+</body>
+</html>
